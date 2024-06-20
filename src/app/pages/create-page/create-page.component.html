@@ -1,3 +1,3 @@
 <h2 class="section-title create-page__title">Добавить пользователя</h2>
 
-<app-user-form (userSubmit)="createUser($event)"></app-user-form>
+<app-user-form [isDisabled]="disabledActions" (userSubmit)="createUser($event)"></app-user-form>

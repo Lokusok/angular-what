@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../data/users/user.interface';
 import { UsersService } from '../../data/users/users.service';
-import { map } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { UserFormComponent } from '../../components/user-form/user-form.component';
 
@@ -18,24 +18,30 @@ export class UserPageComponent {
   router = inject(Router);
   usersService = inject(UsersService);
 
+  disabledActions = false;
   mode: 'view' | 'edit' = 'view';
 
   user = this.route.params.pipe(
-    map((params) => {
-      const user = this.usersService.getUserById(params['id']);
-      return user;
+    switchMap(({ id }) => {
+      return this.usersService.getUserById(id);
     })
   );
 
   onDeleteBtnClick(userId: IUser['id']) {
-    this.usersService.deleteUserById(userId);
-    this.router.navigate(['']);
+    this.disabledActions = true;
+    this.usersService.deleteUserById(userId).subscribe(() => {
+      this.router.navigate(['']);
+    });
   }
 
   editUser(user: IUser) {
-    this.usersService.editById(user.id, user);
-    this.user = this.user.pipe(map(() => user));
-    this.mode = 'view';
+    this.disabledActions = true;
+
+    this.usersService.editById(user.id, user).subscribe(() => {
+      this.mode = 'view';
+      this.disabledActions = false;
+      this.user = this.usersService.getUserById(user.id);
+    });
   }
 
   toEditMode() {

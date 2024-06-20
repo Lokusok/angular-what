@@ -14,14 +14,25 @@
   Редактирование <u>{{ user.name }}</u>
 </h2>
 
-<app-user-form [user]="user" (userSubmit)="editUser($event)" submitText="Обновить"></app-user-form>
+<app-user-form
+  [isDisabled]="disabledActions"
+  [user]="user"
+  (userSubmit)="editUser($event)"
+  submitText="Обновить"
+></app-user-form>
 }
 
 <div class="user-page__footer">
   @if (mode !== 'edit') {
-  <button class="btn" (click)="onDeleteBtnClick(user.id)">Удалить</button>
+  <button [disabled]="disabledActions" class="btn" (click)="onDeleteBtnClick(user.id)">
+    Удалить
+  </button>
   }
-  <button class="btn" (click)="mode === 'view' ? toEditMode() : toViewMode()">
+  <button
+    [disabled]="disabledActions"
+    class="btn"
+    (click)="mode === 'view' ? toEditMode() : toViewMode()"
+  >
     {{ mode === 'view' ? 'Изменить' : 'К просмотру' }}
   </button>
 </div>

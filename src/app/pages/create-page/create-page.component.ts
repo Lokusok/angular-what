@@ -14,8 +14,12 @@ import { UserFormComponent } from '../../components/user-form/user-form.componen
 export class CreatePageComponent {
   usersService = inject(UsersService);
 
+  disabledActions = false;
+
   createUser(user: IUser) {
-    this.usersService.addUser(user);
-    console.log('here:', user);
+    this.disabledActions = true;
+    this.usersService.addUser(user).subscribe(() => {
+      this.disabledActions = false;
+    });
   }
 }

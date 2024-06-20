@@ -1,7 +1,8 @@
 <h2 class="section-title main-page__title">Главная. Список всех пользователей</h2>
 
-@if (usersService.users.length > 0) { @for (user of usersService.users; track user.id) {
+@if (usersService.users.length > 0) {
 <div class="grid">
+  @for (user of usersService.users; track user.id) {
   <article class="user-card">
     <h3 class="user-card__title">{{ user.name }}</h3>
 
@@ -11,7 +12,8 @@
 
     <a class="btn" [routerLink]="['user', user.id]">Просмотреть</a>
   </article>
+  }
 </div>
-} } @else {
+} @else {
 <p class="main-page__empty-notifier">Пользователей нет...</p>
 }

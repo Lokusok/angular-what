@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, effect, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUser } from '../../data/users/user.interface';
 
@@ -12,6 +12,7 @@ import { IUser } from '../../data/users/user.interface';
 export class UserFormComponent {
   @Output() userSubmit = new EventEmitter<IUser>();
   @Input() submitText = 'Создать';
+  isDisabled = input(false);
   @Input() user: IUser = {
     id: '',
     name: '',
@@ -20,13 +21,43 @@ export class UserFormComponent {
   form: FormGroup = new FormGroup({});
 
   ngOnInit() {
-    console.log('constructor:', this.user);
-
     this.form = new FormGroup({
-      name: new FormControl(this.user.name, [Validators.required, Validators.minLength(2)]),
-      descr: new FormControl(this.user.descr, [Validators.required, Validators.minLength(30)]),
+      name: new FormControl({ value: this.user.name, disabled: this.isDisabled() }, [
+        Validators.required,
+        Validators.minLength(2),
+      ]),
+      descr: new FormControl({ value: this.user.descr, disabled: this.isDisabled() }, [
+        Validators.required,
+        Validators.minLength(30),
+      ]),
     });
   }
+
+  constructor() {
+    effect(() => {
+      if (this.isDisabled()) {
+        this.form.get('name')?.disable();
+        this.form.get('descr')?.disable();
+      } else {
+        this.form.get('name')?.enable();
+        this.form.get('descr')?.enable();
+      }
+    });
+  }
+
+  // ngOnChanges(changes: Record<string, any>) {
+  //   const isDisabledNew = changes['isDisabled'];
+
+  //   if (isDisabledNew) {
+  //     if (isDisabledNew.currentValue) {
+  // this.form.get('name')?.disable();
+  // this.form.get('descr')?.disable();
+  //     } else {
+  // this.form.get('name')?.enable();
+  // this.form.get('descr')?.enable();
+  //     }
+  //   }
+  // }
 
   onSubmit() {
     if (!this.form.valid) return;
