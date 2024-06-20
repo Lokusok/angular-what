@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --accent-color-1: #141414;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 25px;
+  background: var(--accent-color-1);
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

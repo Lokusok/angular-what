@@ -1,0 +1,24 @@
+<form class="user-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="user-form__row">
+    <label class="user-form__label">
+      <span class="user-form__text">Имя пользователя:</span>
+      <input class="user-form__input" type="text" formControlName="name" />
+    </label>
+  </div>
+
+  <div class="user-form__row">
+    <label class="user-form__label">
+      <span class="user-form__text">Описание:</span>
+      <textarea
+        class="user-form__input user-form__input_textarea"
+        formControlName="descr"
+      ></textarea>
+    </label>
+  </div>
+
+  <div class="user-form__row user-form__bottom-actions">
+    <button class="user-form__submit-btn" type="submit" [disabled]="!form.valid">
+      {{ submitText }}
+    </button>
+  </div>
+</form>

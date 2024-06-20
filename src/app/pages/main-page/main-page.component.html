@@ -1,0 +1,17 @@
+<h2 class="section-title main-page__title">Главная. Список всех пользователей</h2>
+
+@if (usersService.users.length > 0) { @for (user of usersService.users; track user.id) {
+<div class="grid">
+  <article class="user-card">
+    <h3 class="user-card__title">{{ user.name }}</h3>
+
+    <p class="user-card__descr">
+      {{ user.descr }}
+    </p>
+
+    <a class="btn" [routerLink]="['user', user.id]">Просмотреть</a>
+  </article>
+</div>
+} } @else {
+<p class="main-page__empty-notifier">Пользователей нет...</p>
+}

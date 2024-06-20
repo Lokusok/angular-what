@@ -1,0 +1,28 @@
+@if (user | async; as user) { @if (mode === 'view') {
+
+<h2 class="section-title user-page__title">
+  Просмотр пользователя <u>{{ user.name }}</u>
+</h2>
+
+<div class="user-page__content">
+  <p class="user-page__descr">
+    {{ user.descr }}
+  </p>
+</div>
+} @else {
+<h2 class="section-title user-page__title">
+  Редактирование <u>{{ user.name }}</u>
+</h2>
+
+<app-user-form [user]="user" (userSubmit)="editUser($event)" submitText="Обновить"></app-user-form>
+}
+
+<div class="user-page__footer">
+  @if (mode !== 'edit') {
+  <button class="btn" (click)="onDeleteBtnClick(user.id)">Удалить</button>
+  }
+  <button class="btn" (click)="mode === 'view' ? toEditMode() : toViewMode()">
+    {{ mode === 'view' ? 'Изменить' : 'К просмотру' }}
+  </button>
+</div>
+}

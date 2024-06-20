@@ -1,0 +1,57 @@
+.user-form {
+  max-width: 540px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+  }
+
+  &__text {
+    font-size: 18px;
+  }
+
+  &__input {
+    border-radius: 4px;
+    border: 1px solid var(--accent-color-1);
+    padding: 5px 10px;
+    font-size: 18px;
+
+    &_textarea {
+      height: 180px;
+      resize: none;
+    }
+  }
+
+  &__bottom-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__submit-btn {
+    padding: 10px 25px;
+    background: var(--accent-color-1);
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.4;
+    }
+
+    &:disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <ul class="nav__list">
+        <li class="nav__list-item">
+          <a
+            class="nav__list-link"
+            routerLink="/"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="active"
+            >Главная</a
+          >
+        </li>
+        <li class="nav__list-item">
+          <a
+            class="nav__list-link"
+            routerLink="/create"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="active"
+            >Создать</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</section>

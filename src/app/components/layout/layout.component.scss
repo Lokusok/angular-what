@@ -1,0 +1,29 @@
+.header {
+  background-color: var(--accent-color-1);
+  padding: 1.8rem 0;
+  color: #fff;
+  margin-bottom: 3rem;
+}
+
+.nav__list {
+  display: flex;
+  list-style-type: none;
+  gap: 30px;
+  justify-content: center;
+}
+
+.nav__list-link {
+  font-size: 24px;
+  color: #fff;
+  text-decoration: none;
+
+  &.active {
+    opacity: 0.5;
+    text-decoration: underline;
+  }
+
+  &:hover:not(&.active) {
+    opacity: 0.9;
+    text-decoration: underline;
+  }
+}
